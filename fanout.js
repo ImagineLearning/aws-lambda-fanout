@@ -63,7 +63,7 @@ function postToService(serviceReference, target, records, stats, callback) {
     var size = record.size + (includeKey ? Buffer.byteLength(record.key) : 0);
 		if((size + listOverhead + recordOverhead) > maxUnitSize) {
 			console.error("Record too large to be pushed to target '" + target.id + "' of type '" + target.type + "':\n", JSON.stringify(record));
-			errors.push(new Error("Record too large, was removed"));
+			//errors.push(new Error("Record too large, was removed")); // NOTE: This causes lambda (context) to fail, which in this case, we don't want to do
 			return false;
 		} else {
 			return true;
